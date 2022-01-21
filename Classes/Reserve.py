@@ -64,7 +64,7 @@ class Reservation:
         table_row = 0
         for row in reservations:
             parent_class.reservation.setItem(table_row, 0, QtWidgets.QTableWidgetItem(str(row[0])))
-            parent_class.reservation.setItem(table_row, 1, QtWidgets.QTableWidgetItem(row[1]))
+            parent_class.reservation.setItem(table_row, 1, QtWidgets.QTableWidgetItem(str(row[1])))
             parent_class.reservation.setItem(table_row, 2, QtWidgets.QTableWidgetItem(str(row[2])))
             parent_class.reservation.setItem(table_row, 3, QtWidgets.QTableWidgetItem(str(row[3])))
             parent_class.reservation.setItem(table_row, 4, QtWidgets.QTableWidgetItem(row[4]))

@@ -16,3 +16,10 @@ def fetchone(cursor):
         temp = i[0]
 
     return temp
+
+
+def fetchoneObject(cursor):
+    temp = None
+    for i in cursor:
+        temp = i
+    return temp

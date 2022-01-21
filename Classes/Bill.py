@@ -27,19 +27,26 @@ class Invoice:
             table_row += 1
 
         self.foods_price = foods_price
+        cursor.close()
+        conn.close()
 
     def get_all_rooms(self, parent_class, reservation_id):
         conn, cursor = connect_to_database()
         rooms = get_rooms_with_reserve_id(cursor, reservation_id)
+        room_ids = list()
+        table_row = 0
+        for row in rooms:
+            parent_class.rooms.setItem(table_row, 0, QTableWidgetItem(str(row[0])))
+            room_ids.append(row[0])
+            table_row +=1
         conn, cursor = connect_to_database()
         nights = get_nights(cursor, reservation_id)
         table_row = 0
         rooms_price = 0
-        for row in rooms:
-            parent_class.rooms.setItem(table_row, 0, QTableWidgetItem(str(row[0])))
+        for i in range(len(room_ids)):
             parent_class.rooms.setItem(table_row, 1, QTableWidgetItem(str(nights)))
             conn, cursor = connect_to_database()
-            price = get_room_price(cursor, row[0])
+            price = get_room_price(cursor, room_ids[0])
             rooms_price += price * nights
             parent_class.rooms.setItem(table_row, 2, QTableWidgetItem(str(price)))
             table_row += 1
@@ -57,6 +64,8 @@ class Invoice:
             services_price += 100000
             table_row += 1
         self.services_price = services_price
+        cursor.close()
+        conn.close()
 
     def set_total(self):
         self.total = self.services_price + self.rooms_price + self.foods_price

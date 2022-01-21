@@ -1,10 +1,10 @@
-from DB_Modules.DataBaseConnection import fetchone
+from DB_Modules.DataBaseConnection import fetchone, fetchoneObject
 
 
 def get_user_password(cursor, user_name):
     sql_query = 'select g_password from Guest where national_id= %s'
     cursor.execute(sql_query, (user_name,))
-    sql_pass = fetchone(cursor)
+    sql_pass = fetchoneObject(cursor)
     return sql_pass
 
 
