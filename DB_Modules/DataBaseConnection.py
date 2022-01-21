@@ -1,11 +1,18 @@
-import pyodbc
+import mysql.connector
 
 
 def connect_to_database():
-    conn = pyodbc.connect('Driver={SQL Server};'
-                          'Server=DESKTOP-K4D634H;'
-                          'Database=DB_Project;'
-                          'Trusted_Connection=yes;')
+    conn = mysql.connector.connect(
+        host="localhost", user="root", passwd="a1234", database="db_project"
+    )
     cursor = conn.cursor()
 
     return conn, cursor
+
+
+def fetchone(cursor):
+    temp = None
+    for i in cursor:
+        temp = i[0]
+
+    return temp

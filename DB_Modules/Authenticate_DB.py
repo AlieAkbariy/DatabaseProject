@@ -1,28 +1,32 @@
+from DB_Modules.DataBaseConnection import fetchone
+
+
 def get_user_password(cursor, user_name):
-    sql_query = 'select g_password from Guest where national_id= ?'
+    sql_query = 'select g_password from Guest where national_id= %s'
     cursor.execute(sql_query, (user_name,))
-    sql_pass = cursor.fetchone()
+    sql_pass = fetchone(cursor)
     return sql_pass
 
 
 def create_user(conn, cursor, user_name, password):
-    sql_query = 'insert into Guest (national_id,g_password) values (?,?)'
+    sql_query = 'insert into Guest (national_id,g_password) values (%s,%s)'
     cursor.execute(sql_query, (user_name, password))
     conn.commit()
 
 
 def get_user_id(cursor, user_name, password):
-    sql_query = ''' select Guest.id from Guest where Guest.national_id = ? and 
-    Guest.g_password = ?
+    sql_query = ''' select Guest.id from Guest where Guest.national_id = %s and 
+    Guest.g_password = %s
     '''
-    user_id = cursor.execute(sql_query, (user_name, password)).fetchone()
-    return int(user_id[0])
+    cursor.execute(sql_query, (user_name, password))
+    user_id = fetchone(cursor)
+    return int(user_id)
 
 
 def complete_user_information(conn, cursor, user_name, first_name, last_name, phone_number, address, birth_date,
                               gender):
-    sql_query = '''update Guest set first_name = ? , last_name = ? , phone_number = ? ,
-        guest_address = ? , birth_date = ? , gender = ? where id = ? 
+    sql_query = '''update Guest set first_name = %s , last_name = %s , phone_number = %s ,
+        guest_address = %s , birth_date = %s , gender = %s where id = %s 
 
     '''
     cursor.execute(sql_query, (first_name, last_name, phone_number, address, birth_date, gender, user_name))
