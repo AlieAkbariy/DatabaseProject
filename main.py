@@ -196,6 +196,7 @@ class ReservationDetails(QDialog):
     def make_reservation_details(self):
         extra_facilities = self.extrafacilities.toPlainText()
         reserve.create_reservation_details(extra_facilities)
+        self.confirmmassage.setText("Reservation Confirmed")
 
     def add_people(self):
         first_name = self.firstname.text()
@@ -203,6 +204,7 @@ class ReservationDetails(QDialog):
         national_id = self.nationalid.text()
         gender = self.gender.currentText()
         reserve.create_people(first_name, last_name, national_id, gender)
+        self.addmassage.setText("Person Added")
 
 
 class ShowRestaurants(QDialog):
@@ -309,6 +311,7 @@ class FoodList(QDialog):
         serve_in = self.serveplace.currentText()
         room_id = self.roomid.text()
         restaurants.order_confirmed(self, reserve.reservation_id, room_id, serve_in)
+        self.massage.setText("Order Confirmed")
 
     def back_to_main_menu(self):
         main_menu = MainMenu()
@@ -371,6 +374,7 @@ class CleaningServiceRequest(QDialog):
         cleaning_description = self.description.toPlainText()
         cleaning_service = CleaningService(reservation_id, room_id, cleaning_time, cleaning_date, cleaning_description)
         cleaning_service.confirm_cleaning_service()
+        self.massage.setText("Order Confirmed")
 
     def back_to_main_menu(self):
         main_menu = MainMenu()
