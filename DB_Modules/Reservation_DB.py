@@ -76,7 +76,7 @@ def reservation_details(conn, cursor, reservation_id, room_id, extra_facilities)
 
 
 def update_room_status(conn, cursor, room_id):
-    sql_quary = '''update Room set Room.rs_id = 1 where Room.id = %s'''
+    sql_quary = '''update Room set Room.rs_id = 2 where Room.id = %s'''
     cursor.execute(sql_quary, (room_id,))
     conn.commit()
 

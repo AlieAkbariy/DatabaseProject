@@ -176,7 +176,7 @@ color: rgb(0, 85, 255);</string>
      </rect>
     </property>
     <property name="displayFormat">
-     <string>yyyy-M-dd HH:MM</string>
+     <string>yyyy-M-dd HH:mm</string>
     </property>
     <property name="calendarPopup">
      <bool>true</bool>
