@@ -183,6 +183,26 @@
      <string>Bill</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="logout">
+    <property name="geometry">
+     <rect>
+      <x>540</x>
+      <y>570</y>
+      <width>271</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-radius:20px;
+                        font: 14pt &quot;MS Shell Dlg 2&quot;;
+                        background-color:rgb(170, 255, 255);
+                        color:rgb(0, 0, 0)
+                    </string>
+    </property>
+    <property name="text">
+     <string>Log out</string>
+    </property>
+   </widget>
   </widget>
  </widget>
  <resources/>

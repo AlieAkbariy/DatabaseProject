@@ -95,8 +95,9 @@ class MainMenu(QDialog):
         super(MainMenu, self).__init__()
         loadUi("GUI/MainMenu_Screens/MainMenu.ui", self)
         self.bookroom.clicked.connect(self.go_to_book_room_screen)
+        self.logout.clicked.connect(self.log_out)
         reserve.check_status()
-        if reserve.status != 1:
+        if reserve.status == 1:
             self.showrestaurants.clicked.connect(self.go_to_show_restaurants_screen)
             self.showallfood.clicked.connect(self.go_to_show_allfood_screen)
             self.cleaningservicebtn.clicked.connect(self.go_to_cleaning_service_screen)
@@ -134,6 +135,15 @@ class MainMenu(QDialog):
     def go_to_bill_screen(self):
         bill = Bill()
         widget.addWidget(bill)
+        widget.setCurrentIndex(widget.currentIndex() + 1)
+
+    def log_out(self):
+        globals()['invoice'] = Invoice()
+        globals()['reserve'] = Reservation()
+        globals()['restaurants'] = Restaurants()
+        globals()['auth'] = Authenticate()
+        first_screen = WelcomeScreen()
+        widget.addWidget(first_screen)
         widget.setCurrentIndex(widget.currentIndex() + 1)
 
 
