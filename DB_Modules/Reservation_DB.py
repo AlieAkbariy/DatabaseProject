@@ -6,7 +6,8 @@ from DB_Modules.DataBaseConnection import fetchone
 def get_room_with(cursor, from_date, to_date, room_type):
     if room_type == 'All':
         sql_query = ''' select Room.id,Room.room_floor,Room.maximum_capacity,Room.price_per_night,
-         RoomType.no_bed , RoomType.name_type from Room,RoomType where Room.rt_id = RoomType.id and Room.rs_id = 2 and 
+         RoomType.no_bed , RoomType.name_type from Room,RoomType where Room.rt_id = RoomType.id and (Room.rs_id = 2 or 
+         Room.rs_id = 1)  and 
          Room.id not in 
          (select ReservationDetails.room_id from ReservationDetails, Reservation where
          ReservationDetails.reservation_id = Reservation.id and 
@@ -17,9 +18,9 @@ def get_room_with(cursor, from_date, to_date, room_type):
         cursor.execute(sql_query, (from_date, to_date, from_date, from_date))
 
     else:
-        sql_query = ''' select top(100) Room.id,Room.room_floor,Room.maximum_capacity,Room.price_per_night,
+        sql_query = ''' select  Room.id,Room.room_floor,Room.maximum_capacity,Room.price_per_night,
                  RoomType.no_bed , RoomType.name_type from Room,RoomType where Room.rt_id = RoomType.id and
-                  Room.rs_id = 2 and 
+                  (Room.rs_id = 2 or Room.rs_id = 1) and 
                  RoomType.name_type = %s and Room.id 
                  not in (select ReservationDetails.room_id from ReservationDetails, Reservation where
                  ReservationDetails.reservation_id = Reservation.id and 
